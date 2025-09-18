@@ -303,5 +303,27 @@
     confetti({ particleCount: 120, spread: 80, origin: { y: 0.7 } });
   });
 </script>
+
+    <!-- Background Music -->
+  <audio id="bgMusic" autoplay loop>
+    <source src="music/hbd.mp3" type="audio/mpeg">
+    Browser kamu tidak mendukung audio tag.
+  </audio>
+
+  <script>
+    // Agar autoplay lebih konsisten di mobile/desktop
+    document.addEventListener("DOMContentLoaded", function() {
+      const music = document.getElementById("bgMusic");
+      music.volume = 0.6; // set volume lebih lembut
+
+      // Trik: coba play setelah load
+      music.play().catch(() => {
+        console.log("Autoplay dicegah, akan jalan setelah user interaksi.");
+        document.body.addEventListener("click", () => {
+          music.play();
+        }, { once: true });
+      });
+    });
+  </script>
 </body>
 </html>
